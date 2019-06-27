@@ -22,7 +22,7 @@ Invoke the customer interface with:
 ```
 node bamazonCustomer.js
 ```
-You will then be presented with a series of prompts.
+You will then be presented with a series of guided prompts that give you the choice to view the catalog and make a purchase, or quit.
 
 ## Overview
 

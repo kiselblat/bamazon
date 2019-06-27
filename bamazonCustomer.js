@@ -35,29 +35,29 @@ var startMenu = function() {
       case 'View Catalog':
         displayProducts();
         break;
-        case 'Quit':
-          quittingTime();
-          break;
-          default:
-            quittingTime();
-          }
-        });
-      };
+      case 'Quit':
+        quittingTime();
+        break;
+      default:
+        quittingTime();
+    }
+  });
+};
       
-      var displayProducts = function() {
-        var productTable = new Table({
-          head: [' ID ' , ' Product ' , ' Price '],
-        });
-        connection.query("SELECT * FROM products;", 
-        function(err, res) {
-          if (err) throw err;
-          res.forEach(function(element) {
-            productTable.push([element.item_id , element.product_name , `$${element.price}`]);
-          });
-          console.log(productTable.toString());
-          purchaseInquire();
-        });
-      }
+var displayProducts = function() {
+  var productTable = new Table({
+    head: [' ID ' , ' Product ' , ' Price '],
+  });
+  connection.query("SELECT * FROM products;", 
+  function(err, res) {
+    if (err) throw err;
+    res.forEach(function(element) {
+      productTable.push([element.item_id , element.product_name , `$${element.price}`]);
+    });
+    console.log(productTable.toString());
+    purchaseInquire();
+  });
+}
       
 var purchaseInquire = function() {
   inquirer.prompt([
