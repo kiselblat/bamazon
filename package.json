@@ -1,0 +1,30 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "Buy fake things from a fake cli app",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiselblat/bamazon.git"
+  },
+  "keywords": [
+    "node.js",
+    "mysql",
+    "coding",
+    "assignment"
+  ],
+  "author": "Tom Christ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kiselblat/bamazon/issues"
+  },
+  "homepage": "https://github.com/kiselblat/bamazon#readme",
+  "dependencies": {
+    "cli-table2": "^0.2.0",
+    "inquirer": "^6.4.1",
+    "mysql": "^2.17.1"
+  }
+}
