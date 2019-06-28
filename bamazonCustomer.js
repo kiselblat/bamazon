@@ -96,20 +96,32 @@ var purchasePrompt = function() {
         anotherInquire();
       } else {
         console.log("We've got that!");
-        var newQuantity = parseInt(response[0].stock_quantity) - parseInt(order.quantity);
-        makePurchase(order.productID , newQuantity);
+        // var newQuantity = parseInt(response[0].stock_quantity) - parseInt(order.quantity);
+        makePurchase(order.productID , order.quantity);
       }
     });
   });
 };
 
-var makePurchase = function(idNumber , quantity) {
-  connection.query('UPDATE products SET stock_quantity=? WHERE item_id=?;', 
-  [quantity , idNumber], 
+var makePurchase = function(itemID , purchaseQty) {
+  connection.query('SELECT * FROM products WHERE item_id = ?', 
+  itemID,
+  function(error , response) {
+    if (error) throw error;
+    console.log("Making purchase...")
+    var newQuantity = response[0].stock_quantity - purchaseQty;
+    var newSales = parseFloat(response[0].product_sales + (response[0].price * purchaseQty));
+    updateProductDB(itemID , newQuantity , newSales);
+  });
+};
+
+var updateProductDB = function(idNumber , quantity , revenue) {
+  connection.query('UPDATE products SET stock_quantity=? , product_sales=? WHERE item_id=?;', 
+  [quantity , revenue , idNumber], 
   function(error , response) {
     if (error) throw error;
     // console.log(response);
-    console.log("Purchase complete!");
+    console.log("...Purchase complete!");
     anotherInquire();
   });
 };

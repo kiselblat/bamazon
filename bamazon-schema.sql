@@ -13,3 +13,10 @@ CREATE TABLE products (
   product_sales DEC(10,2) NULL,
   PRIMARY KEY (item_id)
 );
+
+CREATE TABLE departments (
+  department_id INT NOT NULL AUTO_INCREMENT,
+  department_name VARCHAR(60) NULL,
+  over_head_costs DEC(10,2) NULL,
+  PRIMARY KEY (department_id)
+);
