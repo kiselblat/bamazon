@@ -27,13 +27,16 @@ var startMenu = function() {
       type: 'list',
       name: 'start',
       message: "Hello! Select below: ",
-      choices: ["View Catalog" , "Quit"]
+      choices: ["View Catalog" , "Make Purchase" , "Quit"]
     },
   ]).then(function(select){
     console.log(select.start)
     switch(select.start) {
       case 'View Catalog':
-        displayProducts();
+        displayProducts(purchaseInquire);
+        break;
+      case 'Make Purchase':
+        displayProducts(purchasePrompt);
         break;
       case 'Quit':
         quittingTime();
@@ -44,7 +47,7 @@ var startMenu = function() {
   });
 };
       
-var displayProducts = function() {
+var displayProducts = function(callback) {
   var productTable = new Table({
     head: [' ID ' , ' Product ' , ' Price '],
   });
@@ -55,7 +58,7 @@ var displayProducts = function() {
       productTable.push([element.item_id , element.product_name , `$${element.price}`]);
     });
     console.log(productTable.toString());
-    purchaseInquire();
+    callback();
   });
 }
       
@@ -136,7 +139,7 @@ var anotherInquire = function() {
     }
   ]).then(function(choice) {
     if (choice.another) {
-      displayProducts();
+      displayProducts(purchasePrompt);
     } else {
       quittingTime();
     }

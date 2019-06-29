@@ -20,7 +20,7 @@ connection.connect(function(err){
 	startMenu();
 });
 
-// First run menu, currently just gives you the chance to quit
+// Function menu
 var startMenu = function() {
   inquirer.prompt([
     {
@@ -61,17 +61,19 @@ var startMenu = function() {
 
 var displayProducts = function(callback) {
   var productTable = new Table({
-    head: [' ID ' , ' Product ' , ' Price ' , 'Quantity'],
+    head: [' ID ' , ' Product ' , ' Quantity ' , ' Price ' , ' Units Sold ' , ' Total Sales '],
   });
-  connection.query("SELECT * FROM products;", 
+  connection.query("SELECT *, product_sales / price AS units_sold FROM products;", 
   function(err, res) {
     if (err) throw err;
     res.forEach(function(element) {
       productTable.push([
         element.item_id, 
         element.product_name, 
-        `$${element.price}`, 
         element.stock_quantity,
+        `$${element.price}`,
+        element.units_sold,
+        `$${element.product_sales}`,
       ]);
     });
     console.log(productTable.toString());
@@ -142,7 +144,7 @@ var makeAddInventory = function() {
 };
 
 var updateInventory = function(itemID , quantity) {
-  console.log(`updateInventory(${itemID} , ${quantity})`);
+  // console.log(`updateInventory(${itemID} , ${quantity})`);
   connection.query('UPDATE products SET stock_quantity=? WHERE item_id=?;',
   [quantity , itemID],
   function(error , response) {
@@ -154,13 +156,13 @@ var updateInventory = function(itemID , quantity) {
 
 var makeNewProduct = function(callback) {
   var deptChoices = [];
-  connection.query('SELECT department_name FROM products' , function(error , response) {
+  connection.query('SELECT department_name FROM departments;' , function(error , response) {
     if (error) throw error;
     response.forEach(function(element) {
       if (!deptChoices.includes(element.department_name)) {
         deptChoices.push(element.department_name);
       }
-    });name
+    });
     // Build a new product object
     inquirer.prompt([
       // product_name
@@ -194,25 +196,12 @@ var makeNewProduct = function(callback) {
       newItem,
       function(error , response) {
         if (error) throw error;
-        console.log(response.affectedRows + " product inserted!\n");
+        // console.log(response.affectedRows + " product inserted!\n");
         callback();
       });
     });
   });
 };
-
-function addProduct(params , callback){
-	//takes in params, which is a JSON describing the row we want to add
-	connection.query(
-    "INSERT INTO products SET ?",
-    [params],
-    function(err, res) {
-      if (err) throw err;
-      console.log(res.affectedRows + " product inserted!\n");
-      callback();
-    }
-  );
-}
 
 var startInquire = function() {
   inquirer.prompt([
