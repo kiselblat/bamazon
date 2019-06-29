@@ -13,10 +13,10 @@ INSERT INTO products (product_name, department_name, price, stock_quantity, prod
 VALUES ("Emerald Cufflinks", "fashion", 300.00, 5, 3000);
  
 INSERT INTO products (product_name, department_name, price, stock_quantity, product_sales)
-VALUES ("Smartphone", "electronics", 850.00, 100, 18000);
+VALUES ("Smartphone", "electronics", 800.00, 100, 16000);
  
 INSERT INTO products (product_name, department_name, price, stock_quantity, product_sales)
-VALUES ("Earbuds", "electronics", 70.00, 200, 970);
+VALUES ("Earbuds", "electronics", 70.00, 200, 980);
  
 INSERT INTO products (product_name, department_name, price, stock_quantity, product_sales)
 VALUES ("High Heels", "fashion", 250.00, 150, 2500);
