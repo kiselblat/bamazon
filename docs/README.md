@@ -3,6 +3,9 @@ A mySQL/node.js app for manipulating a basic database. It consists of a SQL sche
 
 1. [Requirements and Installation](#requirements-and-installation)
 1. [How to Use](#how-to-use)
+    1. [Customer Interface](#customer-interface)
+    1. [Manager Interface](#manager-interface)
+    1. [Supervisor Interface](#supervisor-interface)
 1. [Overview](#overview)
 1. [About](#about)
 
@@ -18,11 +21,17 @@ In addition to node.js, there are several node packages required by bamazon: `my
 
 ### Customer Interface
 
+The customer interface allows the user to purchase a product from the bamazon storefront, in the form of a command-line table.
+
 Invoke the customer interface with:
 ```
 node bamazonCustomer.js
 ```
-You will then be presented with a series of guided prompts that give you the choice to view the catalog and make a purchase, or quit.
+You will then be presented with a series of guided prompts that give you the choice to view the catalog, make a purchase, or quit. The only difference between `View Catalog` and `Make Purchase` is that `View Catalog` will ask if you want to purchase something before prompting you enter a product id.  `Make Purchase` allows the user to skip this step.
+
+![See the Demo](./gifs/bamazonCustomer-demo.gif)
+
+### Manager Interface
 
 ## Overview
 
