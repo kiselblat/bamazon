@@ -21,7 +21,7 @@ In addition to node.js, there are several node packages required by bamazon: `my
 
 ### Customer Interface
 
-The customer interface allows the user to purchase a product from the bamazon storefront, in the form of a command-line table.
+The Customer Interface allows the user to purchase a product from the bamazon storefront, in the form of a command-line table.
 
 Invoke the customer interface with:
 
@@ -29,13 +29,13 @@ Invoke the customer interface with:
 node bamazonCustomer.js
 ```
 
-You will then be presented with a series of guided prompts that give you the choice to view the catalog, make a purchase, or quit. The only difference between `View Catalog` and `Make Purchase` is that `View Catalog` will ask if you want to purchase something before prompting you enter a product id.  `Make Purchase` allows the user to skip this step.
+The opening menu describes each of the functions of the Customer Interface. Both `View Catalog` and `Make Purchase` will display the product catalog, but the former will ask if one wants to make a purchase and the latter will simply begin the purchase process.
 
 ![See the Demo](./gifs/bamazonCustomer-demo.gif)
 
 ### Manager Interface
 
-The manager interface allows the user to view products and their sales, check low inventory, add inventory, and add new items.
+The Manager Interface allows the user to view products and their sales, check low inventory, add inventory, and add new items.
 
 Invoke the manager interface with:
 
@@ -43,9 +43,13 @@ Invoke the manager interface with:
 node bamazonManager.js
 ```
 
-You will then be prompeted with a main menu of various functions to choose from. `Add to Inventory` is identical to `View Products for Sale` except it directly prompts the user to add inventory, rather than directing them back to the main menu.
+You will then be presented with a main menu of various functions to choose from. `Add to Inventory` is identical to `View Products for Sale` except it directly prompts the user to add inventory, rather than directing them back to the main menu first.
 
 ![See the Demo](./gifs/bamazonManager-demo.gif)
+
+### Supervisor Interface
+
+The Supervisor Interface 
 
 ## Overview
 
