@@ -40,7 +40,7 @@ var startMenu = function() {
         displayDepartments(startMenu);
         break;
       case 'Create New Department':
-        newDepartment(startMenu);
+        viewDepartments(newDepartment);
         break;
       case 'Quit':
         quittingTime();
@@ -72,7 +72,21 @@ var displayDepartments = function(callback) {
   });
 };
 
-var newDepartment = function(callback) {
+var viewDepartments = function(callback) {
+  var departmentsTable = new Table({
+    head: [' ID ' , ' Department '],
+  });
+  connection.query('SELECT * FROM departments', function(error, response) {
+  if (error) throw error;
+  response.forEach(function(element) {
+    departmentsTable.push([element.department_id , element.department_name]);
+  });
+  console.log(departmentsTable.toString());
+  callback();
+  });
+};
+
+var newDepartment = function() {
   inquirer.prompt([
     {
       type: 'input',
@@ -90,7 +104,7 @@ var newDepartment = function(callback) {
     function(error, response) {
       if (error) throw error;
       console.log(response.affectedRows + " department inserted!\n");
-      callback();
+      viewDepartments(startMenu);
     });
   });
 };
